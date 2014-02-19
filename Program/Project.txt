@@ -1,0 +1,153 @@
+import java.io.File;
+
+import java.io.FileInputStream;
+
+ 
+
+import javax.print.Doc;
+import javax.swing.RowFilter.Entry;
+import javax.xml.parsers.DocumentBuilder;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.soap.Node;
+
+ 
+
+import org.w3c.dom.Attr;
+
+import org.w3c.dom.Document;
+
+import org.w3c.dom.Element;
+
+import org.w3c.dom.NamedNodeMap;
+
+import org.w3c.dom.NodeList;
+
+ 
+
+
+public class MainClass {
+
+     
+
+    public static void main(String[] args) throws Exception {
+
+         
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        dbf.setValidating(false);
+
+        DocumentBuilder db = dbf.newDocumentBuilder();
+
+         
+
+        Document doc = db.parse(new FileInputStream(new File("input.xml")));
+
+        
+		
+        NodeList entries = doc.getElementsByTagName("item");
+       
+         
+
+        int num = entries.getLength();
+         
+
+        for (int i=0; i<num; i++) {
+
+            Element node = (Element) entries.item(i);
+
+            listAllAttributes(node);
+
+        }
+
+        
+
+    }
+
+ 
+
+    public static void listAllAttributes(Element element) {
+
+         
+
+        System.out.println("In the box have :  " + element.getNodeName());
+
+         
+
+        
+
+        NamedNodeMap attributes = element.getAttributes();
+
+ 
+
+        
+        int numAttrs = attributes.getLength();
+
+ 
+
+        for (int i = 0; i < numAttrs; i++) {
+
+            Attr attr = (Attr) attributes.item(i);
+
+             
+
+            String attrName = attr.getNodeName();
+
+            String attrValue = attr.getNodeValue();
+
+            
+            String attrApple = attr.toString() + attr.getFirstChild();
+            
+            
+            
+            
+            System.out.println("Found attr: " + attrName + ": " + attrValue);
+
+            System.out.println("Found apple: " + attrApple); 
+           
+           
+        }
+
+    }
+
+ 
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<batch>
+	<box>
+		<item name="apple = 10"/>
+		<item name="orange = 15"/>
+	</box>
+	<box>
+		<item name="apple = 15"/>
+		<item name="orange = 15"/>
+	</box>
+	<box>
+		<item name="apple = 10"/>
+		<item name="orange = 10"/>
+	</box>
+
+</batch>
