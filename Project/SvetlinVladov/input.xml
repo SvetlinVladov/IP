@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Orders>
+<order>
+  <item apple="6"   />
+  <item vodka="7"   />
+  <item orange="3"  />
+  <item  bannana="1"/>
+  <item pizza="50"  />
+   </order>
+   
+</Orders>
